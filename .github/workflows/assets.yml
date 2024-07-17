@@ -1,0 +1,29 @@
+name: Fetch assets
+
+on:
+  workflow_dispatch: ~
+
+jobs:
+  Fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Update assets
+        run: |
+          mkdir temp
+          cd temp
+          wget -O assets.zip https://github.com/PaiGramTeam/enkanetwork.py-data/archive/refs/heads/fork.zip
+          unzip assets.zip
+          cd ..
+
+          rm -rf enkanetwork/assets/*
+          cp -r temp/enkanetwork.py-data-fork/exports/* enkanetwork/assets/
+          rm -rf temp
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email github-actions[bot]@users.noreply.github.com
+          git add .
+          git commit -m ":bento: Update assets"
+          git push
