@@ -40,6 +40,7 @@ LOGGER = logging.getLogger(__name__)
 
 # Base URL
 BASE_URL = "https://enka.network/{PATH}"
+YATTA_URL = "https://gi.yatta.moe/assets/{PATH}"
 
 # Request
 CHUNK_SIZE = 5 * 2**20
@@ -47,11 +48,16 @@ RETRY_MAX = 10
 
 
 def create_path(path: str) -> str:
-    return BASE_URL.format(PATH=path)
+    return YATTA_URL.format(PATH=path)
 
 
 def create_ui_path(filename: str) -> str:
-    return create_path(f"ui/{filename}.png")
+    if "RelicIcon" in filename:
+        return create_path(f"UI/reliquary/{filename}.png")
+    elif "EquipIcon" in filename and filename.endswith("_Awaken"):
+        a = len("_Awaken")
+        return create_path(f"UI/{filename[:-a]}.png")
+    return create_path(f"UI/{filename}.png")
 
 
 def validate_uid(uid: str) -> bool:
