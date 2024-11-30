@@ -1,6 +1,6 @@
 import logging
 
-from pydantic import BaseModel, Field
+from pydantic import ConfigDict, BaseModel, Field
 from typing import List, Any, Dict
 
 from .equipments import Equipments
@@ -168,6 +168,4 @@ class CharacterInfo(BaseModel):
 
         # Get name from hash map
         self.name = _name
-
-    class Config:
-        use_enum_values = True
+    model_config = ConfigDict(use_enum_values=True)

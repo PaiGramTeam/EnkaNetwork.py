@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import ConfigDict, BaseModel, Field
 from typing import List, Any
 
 from ..enum import ElementType
@@ -36,6 +36,8 @@ class NamecardAsset(BaseModel):
     icon: IconAsset
     banner: IconAsset
     navbar: IconAsset
+
+    model_config = ConfigDict(coerce_numbers_to_str=True)
 
 
 class CharacterIconAsset(BaseModel):
@@ -77,6 +79,8 @@ class CharacterSkillAsset(BaseModel):
     hash_id: str = Field("", alias="nameTextMapHash")
     icon: IconAsset = None
 
+    model_config = ConfigDict(coerce_numbers_to_str=True)
+
 
 class CharacterConstellationsAsset(BaseModel):
     """ Character Constellations (Assets)
@@ -93,6 +97,8 @@ class CharacterConstellationsAsset(BaseModel):
     id: int = 0
     hash_id: str = Field("", alias="nameTextMapHash")
     icon: IconAsset = None
+
+    model_config = ConfigDict(coerce_numbers_to_str=True)
 
 
 class CharacterCostume(BaseModel):
@@ -147,9 +153,7 @@ class CharacterAsset(BaseModel):
     skill_id: int = 0
     skills: List[int] = []
     constellations: List[int] = Field([], alias="talents")
-
-    class Config:
-        use_enum_values = True
+    model_config = ConfigDict(use_enum_values=True, coerce_numbers_to_str=True)
 
     def __init__(self, **data: Any) -> None:
         super().__init__(**data)

@@ -1,6 +1,6 @@
 import logging
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Any, Union
 
 from .utils import IconAsset
@@ -70,6 +70,8 @@ class showAvatar(BaseModel):
     name: str = ""
     icon: IconAsset = None
     element: ElementType = ElementType.Unknown
+
+    model_config = ConfigDict(coerce_numbers_to_str=True)
 
     def __init__(self, **data: Any) -> None:
         super().__init__(**data)

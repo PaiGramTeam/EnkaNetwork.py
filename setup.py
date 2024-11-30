@@ -25,7 +25,7 @@ setuptools.setup(
 		"Operating System :: OS Independent",
 	],
 	install_requires=[
-		"pydantic",
+		"pydantic>=2.0.0,<3.0.0",
 		"aiohttp",
 		"cachetools"
 	],
