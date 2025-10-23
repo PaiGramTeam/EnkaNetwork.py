@@ -86,7 +86,7 @@ class CharacterInfo(BaseModel):
         # Get character
         LOGGER.debug("=== Character Data ===")
         avatarId = str(data["avatarId"])
-        avatarId += f"-{data['skillDepotId']}" if data["avatarId"] in [10000005, 10000007] else ""
+        avatarId += f"-{data['skillDepotId']}" if data["avatarId"] in [10000005, 10000007, 10000117, 10000118] else ""
         character = Assets.character(avatarId)
 
         # Check if character is founded

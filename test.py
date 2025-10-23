@@ -24,7 +24,7 @@ def test_get_asset_data() -> None:
 
             # Check character data
             assert data is not None  # Check data is None
-            if not data.id in [10000005, 10000007]:
+            if not data.id in [10000005, 10000007, 10000117, 10000118]:
                 assert data.id == int(ids)  # Check id is correct
             else:
                 if data.skill_id > 0:
