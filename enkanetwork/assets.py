@@ -94,7 +94,7 @@ class Assets:
             LOGGER.error(f"Player profile picture not found with id: {id}")
             return 
 
-        return utils.IconAsset(filename=data["iconPath"])
+        return utils.IconAsset(filename=data["iconPath"], use_enka=True)
     
     @classmethod
     def constellations(cls, id: int) -> Optional[assets.CharacterConstellationsAsset]:
